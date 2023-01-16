@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View
 {
     let layout = [
-//        GridItem( .fixed(40) ), // a single fixed column of width 40
         GridItem( .flexible( minimum: 40) ),
         GridItem( .flexible( minimum: 40 ) ),
         GridItem( .flexible( minimum: 40 ) ),
@@ -18,33 +17,32 @@ struct ContentView: View
         GridItem( .flexible( minimum: 40 ) ),
         GridItem( .flexible( minimum: 40 ) ),
         GridItem( .flexible( minimum: 40 ) ) //  flexible option creates a column that takes up the available width it has. You must define a minimum width, and you can optionally specify a maximum width
-//        GridItem( .adaptive(minimum: 80) ) // adaptive option fits multiple columns inside the width of a single GridItem
     ]
     var body: some View
     {
-        ScrollView( . horizontal )
+        ScrollView
         {
-            LazyHGrid(
-                rows: layout,
-                pinnedViews: [.sectionHeaders] // see the section header view sticks to the top of the screen while you are scrolling through that particular section
+            LazyVGrid(
+                columns: layout,
+                pinnedViews: [.sectionHeaders]
             ) {
                 ForEach(
-                    year, id: \.name  //  iterates through all of the months of the year. we didn’t make the Month structure conform to Identifiable, so we need to specify a unique key path in the ForEach structure. As long as we don’t have the same name of the month in our year, we can use it as the unique id
+                    year, id: \.name
                 ) { month in
                     Section(
-                        header: Text( verbatim: month.name ) // name of the month
+                        header: Text( verbatim: month.name )
                             .font( .headline )
                     ) {
                         ForEach(
-                           month.days // days of that month
-                        ) { day in // which is an array of Day instances
-                            Capsule() // we create a Capsule with overlay text content that displays a string equal to the value property of the Day.
+                           month.days
+                        ) { day in
+                            Capsule()
                                 .overlay(
                                     Text("\(day.value)")
                                         .foregroundColor(.white)
                                 )
                                 .foregroundColor(.blue)
-                                .frame(width: 40)
+                                .frame(height: 40)
                         }
                     }
                 }
