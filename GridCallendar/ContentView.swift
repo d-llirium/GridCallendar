@@ -24,8 +24,10 @@ struct ContentView: View
     {
         ScrollView
         {
-            LazyVGrid( columns: layout ) // Lazy in LazyVGrid and LazyHGrid refers to the fact that the elements of the grid aren’t created until they are needed to display in the view
-            {
+            LazyVGrid(// Lazy in LazyVGrid and LazyHGrid refers to the fact that the elements of the grid aren’t created until they are needed to display in the view
+                columns: layout,
+                pinnedViews: [.sectionHeaders] // see the section header view sticks to the top of the screen while you are scrolling through that particular section
+            ) {
                 ForEach(
                     year, id: \.name  //  iterates through all of the months of the year. we didn’t make the Month structure conform to Identifiable, so we need to specify a unique key path in the ForEach structure. As long as we don’t have the same name of the month in our year, we can use it as the unique id
                 ) { month in
