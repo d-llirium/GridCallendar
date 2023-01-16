@@ -12,8 +12,8 @@ struct ContentView: View
     let layout = [
         GridItem( .fixed(40) ), // a single fixed column of width 40
         GridItem( .fixed(40) ),
-        GridItem( .fixed(40) ),
-        GridItem( .fixed(40) )
+        GridItem( .flexible(minimum: 40) ),
+        GridItem( .flexible(minimum: 40) )
     ]
     var body: some View
     {
