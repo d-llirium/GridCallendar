@@ -22,10 +22,10 @@ struct ContentView: View
     ]
     var body: some View
     {
-        ScrollView
+        ScrollView( . horizontal )
         {
-            LazyVGrid(// Lazy in LazyVGrid and LazyHGrid refers to the fact that the elements of the grid aren’t created until they are needed to display in the view
-                columns: layout,
+            LazyHGrid(
+                rows: layout,
                 pinnedViews: [.sectionHeaders] // see the section header view sticks to the top of the screen while you are scrolling through that particular section
             ) {
                 ForEach(
@@ -44,7 +44,7 @@ struct ContentView: View
                                         .foregroundColor(.white)
                                 )
                                 .foregroundColor(.blue)
-                                .frame(height: 40)
+                                .frame(width: 40)
                         }
                     }
                 }
